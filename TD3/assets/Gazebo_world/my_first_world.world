@@ -1,0 +1,60 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>  
+    <include>
+      <name>='fire_hydrant'</name>
+      <uri>model://fire_hydrant</uri>
+      <pose>-4.49093 4.34907 0 0 -0 0</pose>
+    </include>
+    <include>
+      <name>='Construction Barrel'</name>
+      <uri>model://construction_barrel</uri>
+      <pose>4.27488 -0.006844 0 0 0 -1.7e-05</pose>
+    </include>
+
+    <include>
+      <name>='Construction Cone'</name>
+      <uri>model://construction_cone</uri>
+      <pose>-2.71664 -0.025283 0 -0 -0 -0</pose>
+    </include>
+
+    <include>
+      <name>='cardboard_box'</name>
+      <uri>model://cardboard_box</uri>
+      <pose>4.51841 4.54949 0.15 0 -0 0</pose>
+    </include>
+
+    <include>
+      <name>='cardboard_box_clone'</name>
+      <uri>model://cardboard_box</uri>
+      <pose>-0.14412 -4.50186 0.14903 2e-06 -2e-06 -0</pose>
+
+    </include>
+
+    <include>
+      <name>='cardboard_box_0'</name>
+      <uri>model://cardboard_box</uri>
+      <pose>-0.144296 -4.50535 0.15 0 -0 0</pose>
+    </include>
+
+    <include>
+      <name>='Gazebo_world'</name>
+      <uri>model://Gazebo_world</uri>
+      <pose>0.005 0.0 0 0 -0 0</pose>
+    </include>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>2.49812 -1.61675 28.7887 -3e-06 1.5698 1.52884</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    
+  </world>
+</sdf>
