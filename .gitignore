@@ -1,0 +1,10 @@
+catkin_ws/build_isolated/
+catkin_ws/devel/
+catkin_ws/devel_isolated/
+catkin_ws/build/
+
+.catkin_workspace
+*.pyc
+
+
+TD3/runs/
