@@ -112,13 +112,13 @@ class TD3(object):
         self.actor = Actor(state_dim, action_dim).to(device)
         self.actor_target = Actor(state_dim, action_dim).to(device) # Target network is for soft update
         self.actor_target.load_state_dict(self.actor.state_dict())
-        self.actor_optimizer = torch.optim.Adam(self.actor.parameters())
+        self.actor_optimizer = torch.optim.SGD(self.actor.parameters(), lr = 0.0001, momentum=0.9)
 
         # Initialize the Critic networks
         self.critic = Critic(state_dim, action_dim).to(device)
         self.critic_target = Critic(state_dim, action_dim).to(device)
         self.critic_target.load_state_dict(self.critic.state_dict())
-        self.critic_optimizer = torch.optim.Adam(self.critic.parameters())
+        self.critic_optimizer = torch.optim.SGD(self.critic.parameters(), lr = 0.001, momentum=0.9)
 
         self.max_action = max_action
         self.writer = SummaryWriter()
@@ -139,7 +139,7 @@ class TD3(object):
         tau=0.005,
         policy_noise=0.2,  # discount=0.99
         noise_clip=0.5,
-        policy_freq=1, # What is this?
+        policy_freq=2, # What is this?
     ):
         av_Q = 0
         max_Q = -inf
@@ -247,17 +247,17 @@ eval_freq = 5e3  # After how many steps to perform the evaluation
 max_ep = 500  # maximum number of steps per episode
 eval_ep = 10  # number of episodes for evaluation
 max_timesteps = 5e6  # Maximum number of steps to perform
-expl_noise = 1  # Initial exploration noise starting value in range [expl_min ... 1]
+expl_noise = 0.8  # Initial exploration noise starting value in range [expl_min ... 1]
 expl_decay_steps = (
     500000  # Number of steps over which the initial exploration noise will decay over
 )
 expl_min = 0.1  # Exploration noise after the decay in range [0...expl_noise]
-batch_size = 40  # Size of the mini-batch
-discount = 0.99999  # Discount factor to calculate the discounted future reward (should be close to 1)
-tau = 0.005  # Soft target update variable (should be close to 0)
+batch_size = 64  # Size of the mini-batch
+discount = 0.99  # Discount factor to calculate the discounted future reward (should be close to 1)
+tau = 0.001  # Soft target update variable (should be close to 0)
 policy_noise = 0.2  # Added noise for exploration
 noise_clip = 0.5  # Maximum clamping values of the noise
-policy_freq = 2  # Frequency of Actor network updates
+policy_freq = 1  # Frequency of Actor network updates
 buffer_size = 1e6  # Maximum size of the buffer
 file_name = "TD3_velodyne"  # name of the file to store the policy
 save_model = True  # Weather to save the model or not
@@ -338,7 +338,7 @@ while timestep < max_timesteps:
         episode_reward = 0
         episode_timesteps = 0
         episode_num += 1
-        print("Episode Number: ", episode_num)
+        # print("Episode Number: ", episode_num)
 
     # add some exploration noise
     if expl_noise > expl_min:
