@@ -3,3 +3,4 @@ torchvision
 tensorboard
 squaternion
 csv
+lib-platform

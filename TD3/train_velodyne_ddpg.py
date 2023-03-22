@@ -6,6 +6,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from numpy import inf
+import csv
+import platform
+from datetime import datetime
 from torch.utils.tensorboard import SummaryWriter
 
 from replay_buffer import ReplayBuffer
@@ -51,6 +54,8 @@ def evaluate(network, epoch, eval_episodes=10):
         % (eval_episodes, epoch, avg_reward, avg_col)
     )
     print("..............................................")
+
+    writer.writerow([eval_episodes, epoch, avg_reward, avg_col])
     return avg_reward
 
 
@@ -264,6 +269,14 @@ save_model = True  # Weather to save the model or not
 load_model = False  # Weather to load a stored model
 random_near_obstacle = True  # To take random actions near obstacles or not
 
+# Write epochs and evaluations in a separate csv file
+now = datetime.now()
+pc_name = platform.node()
+dt_string = now.strftime("%d-%m-%Y_%H-%M-%S")
+f = open('results/'+dt_string+'_'+pc_name+'.csv', 'w')
+writer = csv.writer(f)
+writer.writerow(['eval_episodes', 'epoch','avg_reward', 'avg_col'])
+
 # Create the network storage folders
 if not os.path.exists("./results"):
     os.makedirs("./results")
@@ -387,3 +400,6 @@ evaluations.append(evaluate(network=network, epoch=epoch, eval_episodes=eval_ep)
 if save_model:
     network.save("%s" % file_name, directory="./models")
 np.save("./results/%s" % file_name, evaluations)
+
+# close the csv file
+f.close()
