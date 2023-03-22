@@ -26,38 +26,71 @@ TIME_DELTA = 0.1
 def check_pos(x, y):
     goal_ok = True
 
-    if -3.8 > x > -6.2 and 6.2 > y > 3.8:
+    if -4 > x > -5 and 5 > y > 4: # Obstacle # 1: fire hydrant
         goal_ok = False
 
-    if -1.3 > x > -2.7 and 4.7 > y > -0.2:
+    if 5 > x > 4.2 and 5 > y > 4.2: # Obstacle # 2: Cardboard box
         goal_ok = False
 
-    if -0.3 > x > -4.2 and 2.7 > y > 1.3:
+    if -1.335 > x > -2.78 and 2.9 > y > 1.7: # Obstacle # 3: Wall box
         goal_ok = False
 
-    if -0.8 > x > -4.2 and -2.3 > y > -4.2:
+    if 1.5 > x > 1.3 and 3.1 > y > 1.4: # Obstacle # 4.1: L-shaped wall 1
         goal_ok = False
 
-    if -1.3 > x > -3.7 and -0.8 > y > -2.7:
+    if 3.14 > x > 1.39 and 1.5 > y > 1.35: # Obstacle # 4.2: L-shaped wall 2
         goal_ok = False
 
-    if 4.2 > x > 0.8 and -1.8 > y > -3.2:
+    if -2.317 > x > -3.117 and 1.5 > y > 1.35: # Obstacle # 5: Construction cone
         goal_ok = False
 
-    if 4 > x > 2.5 and 0.7 > y > -3.2:
+    if 4.875 > x > 3.675 and 0.593 > y > -0.61: # Obstacle # 6: Construction barrel
         goal_ok = False
 
-    if 6.2 > x > 3.8 and -3.3 > y > -4.2:
+    if -2.8 > x > -4 and 4 > y > -1.93: # Obstacle # 7: Wall triangle
         goal_ok = False
 
-    if 4.2 > x > 1.3 and 3.7 > y > 1.5:
+    if 0.2 > x > -0.45 and -4.2 > y > -4.9: # Obstacle # 8,9: Cardboard box
         goal_ok = False
 
-    if -3.0 > x > -7.2 and 0.5 > y > -1.5:
+    if 3.45 > x > 2 and -2.56 > y > -4: # Obstacle # 10: Wall box
+        goal_ok = False
+    
+    if x > 4.5 or x < -4.5 or y > 4.5 or y < -4.5: # Boundary check
         goal_ok = False
 
-    if x > 4.5 or x < -4.5 or y > 4.5 or y < -4.5:
-        goal_ok = False
+    # if -3.8 > x > -6.2 and 6.2 > y > 3.8:
+    #     goal_ok = False
+
+    # if -1.3 > x > -2.7 and 4.7 > y > -0.2:
+    #     goal_ok = False
+
+    # if -0.3 > x > -4.2 and 2.7 > y > 1.3:
+    #     goal_ok = False
+
+    # if -0.8 > x > -4.2 and -2.3 > y > -4.2:
+    #     goal_ok = False
+
+    # if -1.3 > x > -3.7 and -0.8 > y > -2.7:
+    #     goal_ok = False
+
+    # if 4.2 > x > 0.8 and -1.8 > y > -3.2:
+    #     goal_ok = False
+
+    # if 4 > x > 2.5 and 0.7 > y > -3.2:
+    #     goal_ok = False
+
+    # if 6.2 > x > 3.8 and -3.3 > y > -4.2:
+    #     goal_ok = False
+
+    # if 4.2 > x > 1.3 and 3.7 > y > 1.5:
+    #     goal_ok = False
+
+    # if -3.0 > x > -7.2 and 0.5 > y > -1.5:
+    #     goal_ok = False
+
+    # if x > 4.5 or x < -4.5 or y > 4.5 or y < -4.5:
+    #     goal_ok = False
 
     return goal_ok
 
@@ -267,7 +300,7 @@ class GazeboEnv:
         # set a random goal in empty space in environment
         self.change_goal()
         # randomly scatter boxes in the environment
-        self.random_box()
+        # self.random_box()
         self.publish_markers([0.0, 0.0])
 
         rospy.wait_for_service("/gazebo/unpause_physics")
