@@ -112,13 +112,13 @@ class TD3(object):
         self.actor = Actor(state_dim, action_dim).to(device)
         self.actor_target = Actor(state_dim, action_dim).to(device) # Target network is for soft update
         self.actor_target.load_state_dict(self.actor.state_dict())
-        self.actor_optimizer = torch.optim.SGD(self.actor.parameters(), lr = 0.0001, momentum=0.9)
+        self.actor_optimizer = torch.optim.SGD(self.actor.parameters(), lr = 0.0001, momentum=0.2)
 
         # Initialize the Critic networks
         self.critic = Critic(state_dim, action_dim).to(device)
         self.critic_target = Critic(state_dim, action_dim).to(device)
         self.critic_target.load_state_dict(self.critic.state_dict())
-        self.critic_optimizer = torch.optim.SGD(self.critic.parameters(), lr = 0.001, momentum=0.9)
+        self.critic_optimizer = torch.optim.SGD(self.critic.parameters(), lr = 0.001, momentum=0.2)
 
         self.max_action = max_action
         self.writer = SummaryWriter()
