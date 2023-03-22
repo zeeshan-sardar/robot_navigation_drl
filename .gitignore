@@ -5,6 +5,7 @@ catkin_ws/build/
 
 .catkin_workspace
 *.pyc
-
+*.pth
+*.npy
 
 TD3/runs/
